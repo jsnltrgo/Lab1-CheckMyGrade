@@ -85,7 +85,7 @@ class TestStudent(unittest.TestCase):
     
     def test_sort_descending(self):
         for i in range(10):
-            self.s.add_new_student(f"desc{i}@sjsu.edu", f"First{i}", f"Last{i}", "TEST101", "A", float(i * 10))
+            self.s.add_new_student(f"student{i}@sjsu.edu", f"First{i}", f"Last{i}", "TEST101", "A", float(i * 10))
 
         start = time.time()
         rows = self.s.sort_students(by="marks", order="desc")
