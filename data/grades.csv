@@ -1,0 +1,6 @@
+grade_id,grade,marks_min,marks_max
+A,A,90.0,100.0
+B,B,80.0,89.0
+C,C,70.0,79.0
+D,D,60.0,69.0
+F,F,0.0,59.0
