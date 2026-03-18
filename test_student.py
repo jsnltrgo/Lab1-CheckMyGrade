@@ -26,6 +26,8 @@ class TestStudent(unittest.TestCase):
             cursor.execute("DELETE FROM students WHERE course_id = 'TEST101'")
             cursor.execute("DELETE FROM courses WHERE course_id = 'TEST101'")
             conn.commit()
+        self.s.sync_to_csv()
+
     def test_add_student(self):
         self.s.add_new_student("test@sjsu.edu", "Test", "User", "TEST101", "A", 95)
         with get_connection() as conn:
@@ -36,6 +38,7 @@ class TestStudent(unittest.TestCase):
         self.assertIsNotNone(row)
         self.assertEqual(row[1], "Test")
         self.assertEqual(row[5], 95)
+    
     def test_delete_student(self):
         self.s.add_new_student("delete@sjsu.edu", "Delete", "Me", "TEST101", "B", 80)
         self.s.delete_student("delete@sjsu.edu")
@@ -44,6 +47,7 @@ class TestStudent(unittest.TestCase):
             cursor.execute("SELECT * FROM students WHERE email_address = 'delete@sjsu.edu'")
             row = cursor.fetchone()
         self.assertIsNone(row)
+    
     def test_update_student(self):
         self.s.add_new_student("update@sjsu.edu", "Update", "Me", "TEST101", "B", 80)
         self.s.update_student_record("update@sjsu.edu", marks=95)
@@ -51,7 +55,8 @@ class TestStudent(unittest.TestCase):
             cursor = conn.cursor()
             cursor.execute("SELECT marks FROM students WHERE email_address = 'update@sjsu.edu'")
             row = cursor.fetchone()
-        self.assertEqual(row[0], 95)
+        self.assertEqual(row[0], 95.0)
+    
     def test_1000_students(self):
         # add 1000 students
         for i in range(1000):

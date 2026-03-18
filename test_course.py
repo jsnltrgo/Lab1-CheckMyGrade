@@ -17,6 +17,7 @@ class TestCourse(unittest.TestCase):
             cursor = conn.cursor()
             cursor.execute("DELETE FROM courses WHERE course_id LIKE 'TEST%'")
             conn.commit()
+        self.c.sync_to_csv()
 
     def test_add_course(self):
         self.c.add_new_course("TEST101", "Test Course", 3)

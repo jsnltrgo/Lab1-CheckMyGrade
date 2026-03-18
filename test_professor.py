@@ -21,6 +21,7 @@ class TestProfessor(unittest.TestCase):
             cursor.execute("DELETE FROM professors WHERE course_id = 'TEST101'")
             cursor.execute("DELETE FROM courses WHERE course_id = 'TEST101'")
             conn.commit()
+        self.p.sync_to_csv()
 
     def test_add_professor(self):
         self.p.add_new_professor("prof.test@sjsu.edu", "Test Prof", "Lecturer", "TEST101")
